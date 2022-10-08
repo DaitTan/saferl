@@ -9,5 +9,16 @@ Since codebase is not available
 4. Initial Test on Pacman
 5. Lets try safeRL benchmarks? (https://openai.com/blog/safety-gym/)
 
+
+# Deliverables
+
+## Phase 1 - October 16
+
+1. Modular Code - Enable easier switching of Gym environments
+2. Knowledge base generation
+3. Working code base
+4. Show results on atleast 1 example (2 in the best case)
+5. Report with structure hinting towards the final project submission
+   
 ## Reference paper link
 https://arxiv.org/abs/2103.02363
