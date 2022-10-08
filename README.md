@@ -22,3 +22,6 @@ Since codebase is not available
    
 ## Reference paper link
 https://arxiv.org/abs/2103.02363
+
+## Helpful Links
+https://www.youtube.com/watch?v=kAaKs_04dEk&t=435s
