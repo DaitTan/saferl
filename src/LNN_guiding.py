@@ -24,18 +24,18 @@ def text_world():
     model = Model()
 
     visited_all_connected_rooms = Predicate("visited_all_conntected_rooms")
-    no_coin_in_east_room = Predicate("no_coin_in_east_room", world=World.CLOSED)
-    no_coin_in_west_room = Predicate("no_coin_in_west_room", world=World.CLOSED)
-    no_coin_in_north_room = Predicate("no_coin_in_north_room", world=World.CLOSED)
-    no_coin_in_south_room = Predicate("no_coin_in_south_room", world=World.CLOSED)
+    no_coin_in_east_room = Predicate("no_coin_in_east_room")
+    no_coin_in_west_room = Predicate("no_coin_in_west_room")
+    no_coin_in_north_room = Predicate("no_coin_in_north_room")
+    no_coin_in_south_room = Predicate("no_coin_in_south_room")
     go_east = Predicate("go_east")
     go_west = Predicate("go_west")
     go_north = Predicate("go_north")
     go_south = Predicate("go_south")
-    found_east_room = Predicate("found_east_room", world=World.CLOSED)
-    found_west_room = Predicate("found_west_room", world=World.CLOSED)
-    found_north_room = Predicate("found_north_room", world=World.CLOSED)
-    found_south_room = Predicate("found_south_room", world=World.CLOSED)
+    found_east_room = Predicate("found_east_room")
+    found_west_room = Predicate("found_west_room")
+    found_north_room = Predicate("found_north_room")
+    found_south_room = Predicate("found_south_room")
     found_coin_in_room = Predicate("found_coin_in_room")
     take_coin = Predicate("take_coin")
 
@@ -93,6 +93,7 @@ def text_world():
         found_coin_in_room: {"state": Fact.FALSE},
         found_north_room: {"state": Fact.TRUE},
         found_south_room: {"state": Fact.TRUE},
+        found_coin_in_room: {"state": Fact.TRUE} 
     })
     model.infer()
     model.print()
@@ -100,6 +101,7 @@ def text_world():
     logger.info(f'Go west: {go_west.state()}')
     logger.info(f'Go north: {go_north.state()}')
     logger.info(f'Go south: {go_south.state()}')
+    logger.info(f'Take coin: {take_coin.state()}')
     # logger.info(f'Go east: {go_east.groundings}')
     # logger.info(f'Go west: {go_west.groundings}')
     # logger.info(f'Go north: {go_north.groundings}')
