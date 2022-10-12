@@ -1,0 +1,6 @@
+defaults:
+    - override hydra/job_logging: logging
+hydra:
+  output_subdir: "."
+  run:
+    dir: "outputs/${now:%m-%d-%Y}/${now:%H-%M-%S}"

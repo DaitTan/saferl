@@ -1,0 +1,7 @@
+10/12/22 01:19:13 PM [    INFO] ********************** Model 2022-10-12 13:19:13.758069 ********************** (model.py:118)
+10/12/22 01:19:13 PM [    INFO] BOUNDED REASONING LOOP (model.py:524)
+10/12/22 01:19:13 PM [    INFO] ---------------------- (model.py:533)
+10/12/22 01:19:13 PM [    INFO] REASONING STEP:0 (model.py:534)
+10/12/22 01:19:13 PM [    INFO] ↑ BOUNDS UPDATED TIGHTENED:1.0 FOR:'(one_square_away(0) → ¬take_action(1))' FORMULA:0  (connective_neuron.py:110)
+10/12/22 01:19:13 PM [    INFO] ↑ CONTRADICTION FOR:'(one_square_away(0) → ¬take_action(1))' FORMULA:0  (connective_neuron.py:117)
+10/12/22 01:19:13 PM [    INFO] UPWARD INFERENCE RESULT:2.0 (model.py:441)

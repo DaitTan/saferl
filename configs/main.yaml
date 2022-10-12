@@ -1,0 +1,7 @@
+defaults:
+  - outputs
+  - _self_
+
+# _target_: "src.LNN_Shielding.text_world"
+_target_: "src.LNN_Shielding.pacman"
+enemies_close: ["blinky"]
