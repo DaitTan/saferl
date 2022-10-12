@@ -1,7 +1,0 @@
-10/12/22 01:01:53 PM [    INFO] ********************** Model 2022-10-12 13:01:53.065874 ********************** (model.py:118)
-10/12/22 01:01:53 PM [    INFO] BOUNDED REASONING LOOP (model.py:524)
-10/12/22 01:01:53 PM [    INFO] ---------------------- (model.py:533)
-10/12/22 01:01:53 PM [    INFO] REASONING STEP:0 (model.py:534)
-10/12/22 01:01:53 PM [    INFO] ====================== (model.py:559)
-10/12/22 01:01:53 PM [    INFO] INFERENCE CONVERGED WITH 0.0 BOUNDS UPDATES IN 1 REASONING STEPS  (model.py:560)
-10/12/22 01:01:53 PM [    INFO] ****************************************************************************** (model.py:565)
