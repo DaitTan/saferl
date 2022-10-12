@@ -3,7 +3,6 @@ import sys
 import logging
 
 from pathlib import Path
-from typing import List
 PARENT_DIR = Path(__file__, '../..').resolve()
 sys.path.append(str(PARENT_DIR))
 
@@ -124,44 +123,30 @@ def text_world():
     model.print()
     logger.info(model.has_contradiction())
 
-
-all_enimies = ["blinky", "plinky", "clyde", "inky"]
-
-def get_data(predicate, agents_one_away: List[str]):
-    data = [{predicate: {enemy: Fact.FALSE} for enemy in all_enimies}]
-    for enemy in agents_one_away:
-        data[predicate][enemy] = Fact.TRUE
-    return data
-
-def pacman(enemies_close: List[str] = []):
+def pacman():
     action, state = map(Variable, ["action", "state"])
     state = Variable("state")
 
     model = Model()
 
     take_action = Predicate("take_action")
-    legal_action = Predicate("legal_action")
     is_one_square_away = Predicate("one_square_away")
 
-    is_legal_action = Implies(legal_action(action), take_action(action))
-    # if_enemy_close_dont_go = Implies(is_one_square_away(state), Not(take_action(action)))
     if_enemy_close_dont_go = ForAll(
         state, action, Implies(is_one_square_away(state), Not(take_action(action))))
 
-    # model.add_knowledge(is_legal_action, if_enemy_close_dont_go, world=World.OPEN)
-    model.add_knowledge(is_legal_action, if_enemy_close_dont_go, world=World.AXIOM)
+    model.add_knowledge(if_enemy_close_dont_go, world=World.AXIOM)
 
     model.add_data({is_one_square_away: {"blinky": Fact.TRUE}})
     model.add_data({is_one_square_away: {"clyde": Fact.FALSE}})
     model.add_data({is_one_square_away: {"pinky": Fact.FALSE}})
     model.add_data({is_one_square_away: {"inky": Fact.FALSE}})
-    model.add_data({
-        take_action: {"agent": Fact.TRUE},
-        legal_action: {"agent": Fact.TRUE}})
+    model.add_data({take_action: {"action": Fact.TRUE}})
 
     model.infer()
     model.print()
     logger.info(f'Does the model have contradiction: {model.has_contradiction()}')
+    logger.info(if_enemy_close_dont_go.state())
 
 @hydra.main(config_path="../configs", config_name="main", version_base="1.2")
 def main(cfg):
