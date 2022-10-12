@@ -1,0 +1,6 @@
+defaults:
+  - outputs
+  - _self_
+
+_target_: "src.LNN_guiding.text_world"
+# _target_: "src.LNN_guiding.pacman"

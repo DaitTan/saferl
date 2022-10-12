@@ -13,7 +13,7 @@ from lnn import (
     Join, And, Exists,
     Implies, ForAll,
     Model, Fact, Or,
-    World, Not
+    World, Not, Loss
 )
 
 logger = logging.getLogger("myLogger")
@@ -129,7 +129,7 @@ def pacman():
 
     model = Model()
 
-    take_action = Predicate("take_action")
+    take_action = Predicate("take_action", world=World.CLOSED)
     is_one_square_away = Predicate("one_square_away")
 
     if_enemy_close_dont_go = ForAll(
@@ -137,6 +137,9 @@ def pacman():
 
     model.add_knowledge(if_enemy_close_dont_go, world=World.AXIOM)
 
+    # model.add_data({is_one_square_away: {"blinky": (0.8, 1.0)}})
+    # model.add_data({is_one_square_away: {"clyde": (0.2, 0.4)}})
+    # model.add_data({is_one_square_away: {"pinky": (0.2, 0.4)}})
     model.add_data({is_one_square_away: {"blinky": Fact.TRUE}})
     model.add_data({is_one_square_away: {"clyde": Fact.FALSE}})
     model.add_data({is_one_square_away: {"pinky": Fact.FALSE}})
@@ -147,8 +150,11 @@ def pacman():
     model.print()
     logger.info(f'Does the model have contradiction: {model.has_contradiction()}')
     logger.info(if_enemy_close_dont_go.state())
+    # model.train(losses=[Loss.SUPERVISED, Loss.CONTRADICTION])
+    # model.train(losses=[Loss.CONTRADICTION])
+    # model.print(params=True)
 
-@hydra.main(config_path="../configs", config_name="main", version_base="1.2")
+@hydra.main(config_path="../configs", config_name="lnn_shielding", version_base="1.2")
 def main(cfg):
     hydra.utils.instantiate(cfg)
 
