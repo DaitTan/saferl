@@ -84,16 +84,15 @@ def text_world():
         world=World.AXIOM
     )
 
-    # Set up an example where the north and west room are found
+    # Set up an example where the north and south room are found
     # And there is a coin in the north room but not south
     model.add_data({
         no_coin_in_north_room: {"state": Fact.FALSE},
         no_coin_in_south_room: {"state": Fact.TRUE},
         visited_all_connected_rooms: {"state": Fact.FALSE},
-        found_coin_in_room: {"state": Fact.FALSE},
+        found_coin_in_room: {"state": Fact.TRUE},
         found_north_room: {"state": Fact.TRUE},
         found_south_room: {"state": Fact.TRUE},
-        found_coin_in_room: {"state": Fact.TRUE} 
     })
     model.infer()
     model.print()

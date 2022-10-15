@@ -1,4 +1,4 @@
-from lnn import Predicate, Variable, Join, And, Exists, Implies, ForAll, Model, Fact
+from lnn import Predicate, Variable, Join, And, Exists, Implies, ForAll, Model, Fact, Predicates, Equivalent, World, Loss
 
 
 def test_1():
@@ -138,10 +138,66 @@ def test_2():
     GT_o = dict([("West", Fact.TRUE)])
     model.print()
     assert all([model.query.state(groundings=g) is GT_o[g] for g in GT_o]), "FAILED 😔"
-    print(f'I am ground {model[query].true_groundings}')
+    print(f'I am ground {model[query].groundings}')
+
+def smokers():
+    x, y = map(Variable, ('x', 'y'))
+
+    model = Model()
+
+    Smokes = Predicate('Smokes')
+    Friends = Predicate('Friends', arity=2)
+    Cancer = Predicate('Cancer', world=World.CLOSED)
+
+    Smoking_causes_Cancer = Implies(Smokes(x), Cancer(x))
+    Smokers_befriend_Smokers = Implies(Friends(x, y), Equivalent(Smokes(x), Smokes(y)))
+
+    formulae = [
+        Smoking_causes_Cancer,
+        Smokers_befriend_Smokers
+    ]
+    model.add_knowledge(*formulae, world=World.AXIOM)
+
+    model.add_data({
+        Friends: {
+            ('Anna', 'Bob'): Fact.TRUE,
+            ('Bob', 'Anna'): Fact.TRUE,
+            ('Anna', 'Edward'): Fact.TRUE,
+            ('Edward', 'Anna'): Fact.TRUE,
+            ('Anna', 'Frank'): Fact.TRUE,
+            ('Frank', 'Anna'): Fact.TRUE,
+            ('Bob', 'Chris'): Fact.TRUE},
+        Smokes: {
+            'Anna': Fact.TRUE,
+            'Edward': Fact.TRUE,
+            'Frank': Fact.TRUE,
+            'Gary': Fact.TRUE},
+        Cancer: {
+            'Anna': Fact.TRUE,
+            'Edward': Fact.TRUE}
+        })
+
+    # model.infer()
+    # model.print()
+    
+    model.add_labels({
+    Smokes: {
+        'Bob': Fact.TRUE,
+        'Nick': Fact.TRUE}
+    })
+
+    # train the model and output results
+    # model.infer()
+    model.train(losses=[Loss.SUPERVISED, Loss.CONTRADICTION])
+    model.print(params=True)
+    print(Cancer.state("Bob"))
+    print(Smokes.state("Bob"))
+    print(Cancer.state("Ivan"))
+    print(Smokes.state("Ivan"))
 
 
 if __name__ == "__main__":
     #test_1()
-    test_2()
-    print("success")
+    # test_2()
+    # print("success")
+    smokers()

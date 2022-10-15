@@ -125,7 +125,6 @@ def text_world():
 
 def pacman():
     action, state = map(Variable, ["action", "state"])
-    state = Variable("state")
 
     model = Model()
 
@@ -137,9 +136,24 @@ def pacman():
 
     model.add_knowledge(if_enemy_close_dont_go, world=World.AXIOM)
 
-    # model.add_data({is_one_square_away: {"blinky": (0.8, 1.0)}})
+    # model.add_data({is_one_square_away: {"blinky": (0.8, 0.9)}})
     # model.add_data({is_one_square_away: {"clyde": (0.2, 0.4)}})
     # model.add_data({is_one_square_away: {"pinky": (0.2, 0.4)}})
+    # model.add_data({is_one_square_away: {"blinky": Fact.FALSE}})
+    # model.add_data({is_one_square_away: {"clyde": Fact.FALSE}})
+    # model.add_data({is_one_square_away: {"pinky": Fact.FALSE}})
+    # model.add_data({is_one_square_away: {"inky": Fact.FALSE}})
+    # for g in ["blinky", "clydy", "pinky", "inky"]:
+        # model.add_data({is_one_square_away: {g: Fact.TRUE}})
+    model.add_data({take_action: {"action": Fact.TRUE}})
+
+    model.infer()
+    model.print()
+    logger.info(f'Does the model have contradiction: {model.has_contradiction()}')
+    logger.info(if_enemy_close_dont_go.state())
+
+    model.flush()
+    model.add_knowledge(if_enemy_close_dont_go, world=World.AXIOM)
     model.add_data({is_one_square_away: {"blinky": Fact.TRUE}})
     model.add_data({is_one_square_away: {"clyde": Fact.FALSE}})
     model.add_data({is_one_square_away: {"pinky": Fact.FALSE}})
