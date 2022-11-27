@@ -1,0 +1,67 @@
+{
+    "args":	{
+        "Namespace(config='configs/safety_config_gym.yml', dynamics_freq=250, env='PointGoal1', eval_freq=3000.0, exp_name='loop_test', max_timesteps=1000000.0, policy='safeLOOP_ARC', seed=0, start_timesteps=100)":	{
+            "config":	"configs/safety_config_gym.yml",
+            "dynamics_freq":	250,
+            "env":	"PointGoal1",
+            "eval_freq":	3000.0,
+            "exp_name":	"loop_test",
+            "max_timesteps":	1000000.0,
+            "policy":	"safeLOOP_ARC",
+            "seed":	0,
+            "start_timesteps":	100
+        }
+    },
+    "config":	{
+        "dynamics_config":	{
+            "hidden_dim":	50
+        },
+        "mpc_config":	{
+            "ARC":	{
+                "alpha":	0.1,
+                "kappa":	1,
+                "max_iters":	4,
+                "mixture_coefficient":	0.05,
+                "particles":	3,
+                "popsize":	50
+            },
+            "CEM":	{
+                "actor_mix":	5,
+                "alpha":	0.1,
+                "epsilon":	0.001,
+                "max_iters":	8,
+                "mixture_coefficient":	0.05,
+                "num_elites":	20,
+                "particles":	2,
+                "popsize":	50
+            },
+            "exploration_noise":	0.0,
+            "gamma":	0.99,
+            "horizon":	8,
+            "reward_horizon":	8
+        },
+        "sac_config":	{
+            "evaluation_mode":	"none"
+        }
+    },
+    "exp_name":	"loop_test",
+    "logger":	{
+        "<logging_utils.logx.EpochLogger object at 0x7f16b5f94c50>":	{
+            "epoch_dict":	{},
+            "exp_name":	"loop_test",
+            "first_row":	true,
+            "log_current_row":	{},
+            "log_headers":	[],
+            "output_dir":	"loop_test_s0",
+            "output_file":	{
+                "<_io.TextIOWrapper name='loop_test_s0/progress.txt' mode='w' encoding='UTF-8'>":	{
+                    "mode":	"w"
+                }
+            }
+        }
+    },
+    "logger_kwargs":	{
+        "exp_name":	"loop_test",
+        "output_dir":	"loop_test_s0"
+    }
+}
